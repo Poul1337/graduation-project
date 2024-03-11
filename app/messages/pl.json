@@ -1,0 +1,10 @@
+{
+  "LoginPage": {
+    "Login" : "Zaloguj się",
+    "yourEmail": "Twój e-mail",
+    "yourPassword": "Twoje hasło",
+    "logIn": "Zaloguj się",
+    "orSignUp": "Albo utwórz konto",
+    "signUp": "Zarejestruj się"
+  }
+}
