@@ -44,8 +44,6 @@ const Form = () => {
     formState: { errors },
   } = useForm<z.infer<typeof schema>>({ resolver: zodResolver(schema) });
 
-  console.log(errors);
-
   return (
     <form className="flex flex-col gap-5">
       <div className="flex gap-4">
