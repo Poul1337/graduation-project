@@ -1,4 +1,5 @@
-import Image from "next/image";
+import Image from 'next/image';
+import RegisterForm from './RegisterForm';
 
 const Register = () => {
   return (
@@ -9,6 +10,7 @@ const Register = () => {
         fill
         className="-z-10 object-cover object-center"
       />
+      <RegisterForm />
     </main>
   );
 };

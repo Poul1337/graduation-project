@@ -1,10 +1,27 @@
 {
   "LoginPage": {
-    "Login" : "Zaloguj się",
+    "Login": "Zaloguj się",
     "yourEmail": "Twój e-mail",
     "yourPassword": "Twoje hasło",
+    "repeatPassword": "Powtórz hasło",
     "logIn": "Zaloguj się",
     "orSignUp": "Albo utwórz konto",
-    "signUp": "Zarejestruj się"
+    "signUp": "Zarejestruj się",
+    "name": "Imię",
+    "secName": "Nazwisko",
+    "email": "Twój e-mail",
+    "company": "Nazwa twojej firmy",
+    "street": "Ulica",
+    "number": "Numer",
+    "terms": "Akceptuje warunki i zasady",
+    "haveAccount": "Masz już konto?",
+    "shortPassword": "Zbyt krótkie hasło!",
+    "wrongEmail": "Zły format!",
+    "isRequired": "Pole obowiązkowe!",
+    "strNumberRequired": "Musisz podać numer ulicy!",
+    "samePasswords": "Hasła nie są takie same!",
+    "termsRequired": "Musisz zaakceptować warunki i zasady!",
+    "passwordCompositionCapitalLetter": "Musisz użyć przynajmniej jednej dużej litery!",
+    "passwordCompositionDigit": "Musisz użyć przynajmniej jednej liczby!"
   }
 }
