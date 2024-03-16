@@ -1,4 +1,4 @@
-import { Register } from "@/features/register";
+import { Register } from '@/features/register';
 
 const RegisterPage = () => {
   return <Register />;

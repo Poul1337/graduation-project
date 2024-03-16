@@ -43,7 +43,7 @@ const Form = () => {
       </div>
       <button
         className={
-          'w-full h-10 border-grayishBlue rounded-2xl border-1 hover:bg-turquoise'
+          'w-full h-10 border-grayishBlue rounded-2xl border-2 hover:bg-turquoise'
         }
       >
         {t('logIn')}

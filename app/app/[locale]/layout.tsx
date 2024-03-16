@@ -1,19 +1,17 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-import { NextIntlClientProvider } from "next-intl";
-import { notFound } from "next/navigation";
-import { Suspense } from "react";
+import type { Metadata } from 'next';
+import { Inter } from 'next/font/google';
+import { NextIntlClientProvider } from 'next-intl';
+import { notFound } from 'next/navigation';
 
-import { AppContext } from "@/Context";
-import Loading from "@/app/[locale]/loading";
+import { AppContext } from '@/Context';
 
-import "./globals.css";
+import './globals.css';
 
-const inter = Inter({ subsets: ["latin"] });
+const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title: "Graduation Project",
-  description: "Graduation project by Paweł Jaruszewski",
+  title: 'Graduation Project',
+  description: 'Graduation project by Paweł Jaruszewski',
 };
 
 type RootLayoutProps = {
@@ -36,9 +34,7 @@ const RootLayout = async ({
     <html lang={locale}>
       <body className={inter.className}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <AppContext>
-            <Suspense fallback={<Loading />}>{children}</Suspense>
-          </AppContext>
+          <AppContext>{children}</AppContext>
         </NextIntlClientProvider>
       </body>
     </html>
