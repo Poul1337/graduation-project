@@ -5,7 +5,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 
-import { InputForm } from '@/Components';
+import { Button, Input } from '@/Components';
 
 const Form = () => {
   const t = useTranslations('LoginPage');
@@ -15,39 +15,33 @@ const Form = () => {
     password: z.string(),
   });
 
-  const {
-    trigger,
-    register,
-    formState: { errors },
-  } = useForm<z.infer<typeof schema>>({ resolver: zodResolver(schema) });
+  const { trigger, register } = useForm<z.infer<typeof schema>>({
+    resolver: zodResolver(schema),
+  });
 
   return (
-    <form className={'flex gap-20 flex-col'}>
-      <div className={'flex flex-col gap-6'}>
-        <InputForm
+    <form className="flex gap-20 flex-col">
+      <div className="flex flex-col gap-6">
+        <Input
           {...register('email')}
           type={'email'}
-          labelName={t('yourEmail')}
+          label={t('yourEmail')}
           id={'email'}
           placeholder={'name@email.com'}
           onBlur={() => trigger('email')}
         />
-        <InputForm
+        <Input
           {...register('password')}
           type={'password'}
-          labelName={t('yourPassword')}
+          label={t('yourPassword')}
           id={'password'}
           placeholder={String.fromCharCode(9679).repeat(10)}
           onBlur={() => trigger('password')}
         />
       </div>
-      <button
-        className={
-          'w-full h-10 border-grayishBlue rounded-2xl border-2 hover:bg-turquoise'
-        }
-      >
+      <Button color="primary" variant="flat" type="submit">
         {t('logIn')}
-      </button>
+      </Button>
     </form>
   );
 };

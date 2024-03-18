@@ -1,9 +1,9 @@
+import { ForwardRefRenderFunction, forwardRef } from 'react';
 import {
   Input as NextuiInput,
   InputProps as NextuiInputProps,
   Tooltip,
-} from "@nextui-org/react";
-import { FC, ForwardRefRenderFunction, forwardRef } from "react";
+} from '@nextui-org/react';
 
 type InputProps = NextuiInputProps;
 
@@ -16,7 +16,7 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
       content={errorMessage as string}
       isDisabled={!errorMessage}
       isOpen={!!errorMessage}
-      placement={id !== "secondName" && id !== "number" ? "left" : "right"}
+      placement={id !== 'secondName' && id !== 'number' ? 'left' : 'right'}
       showArrow={true}
       color="danger"
       offset={15}
@@ -29,11 +29,11 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
           !errorMessage
             ? {
                 inputWrapper:
-                  "border-grayishBlue after:bg-turquoise hover:border-grayishBlue",
+                  'border-grayishBlue after:bg-turquoise hover:border-grayishBlue',
               }
             : {
                 inputWrapper:
-                  "border-danger after:bg-turquoise hover:border-danger",
+                  'border-danger after:bg-turquoise hover:border-danger',
               }
         }
       />
