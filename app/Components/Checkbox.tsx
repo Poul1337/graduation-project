@@ -1,36 +1,39 @@
-import React from 'react';
-import { match } from 'ts-pattern';
+import {
+  Checkbox as CheckboxNextUi,
+  CheckboxProps as CheckboxPropsNextUi,
+  Tooltip,
+} from "@nextui-org/react";
+import { ForwardRefRenderFunction, forwardRef } from "react";
 
-import Tooltip from './Tooltip';
+type CheckboxProps = CheckboxPropsNextUi & { errorMessage: string | undefined };
 
-type CheckboxProps = React.HTMLAttributes<HTMLInputElement> & {
-  label: string;
-  error: string | undefined;
-};
-
-const Checkbox: React.ForwardRefRenderFunction<
-  HTMLInputElement,
-  CheckboxProps
-> = ({ label, onBlur, error, ...restProps }, ref) => {
-  const isError = typeof error !== 'undefined';
-
+const Checkbox: ForwardRefRenderFunction<HTMLLabelElement, CheckboxProps> = (
+  { name, errorMessage, id, ...rest },
+  ref
+) => {
   return (
-    <label className="flex text-xs gap-2 items-center text-turquoise mt-5 relative">
-      <input
-        {...restProps}
-        ref={ref}
-        onBlur={onBlur}
-        type="checkbox"
-        className="w-4 h-4"
-      />
-      {match(isError)
-        .with(true, () => (
-          <Tooltip error={error} side="left" className="-top-2" />
-        ))
-        .otherwise(() => null)}
-      {label}
-    </label>
+    <Tooltip
+      content={errorMessage as string}
+      isDisabled={!errorMessage}
+      isOpen={!!errorMessage}
+      placement={id !== "secondName" && id !== "number" ? "left" : "right"}
+      showArrow={true}
+      color="danger"
+      offset={15}
+    >
+      <span>
+        <CheckboxNextUi
+          ref={ref}
+          {...rest}
+          classNames={{
+            label: "text-sm",
+          }}
+        >
+          {name}
+        </CheckboxNextUi>
+      </span>
+    </Tooltip>
   );
 };
 
-export default React.forwardRef(Checkbox);
+export default forwardRef(Checkbox);

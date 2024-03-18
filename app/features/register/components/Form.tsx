@@ -1,41 +1,43 @@
-'use client';
+"use client";
 
-import { useTranslations } from 'next-intl';
-import { z } from 'zod';
-import { useForm } from 'react-hook-form';
-import { zodResolver } from '@hookform/resolvers/zod';
+import { useTranslations } from "next-intl";
+import { z } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Button } from "@nextui-org/react";
 
-import { Checkbox, InputForm } from '@/Components';
+import { Checkbox } from "@/Components";
+import { Input } from "@/Components";
 
 const Form = () => {
-  const t = useTranslations('LoginPage');
+  const t = useTranslations("LoginPage");
 
   const schema = z
     .object({
-      email: z.string().email(t('wrongEmail')),
+      email: z.string().email(t("wrongEmail")),
       password: z
         .string()
-        .min(8, t('shortPassword'))
-        .regex(new RegExp(/[A-Z]+/), t('passwordCompositionCapitalLetter'))
-        .regex(new RegExp(/\d+/), t('passwordCompositionDigit')),
+        .min(8, t("shortPassword"))
+        .regex(new RegExp(/[A-Z]+/), t("passwordCompositionCapitalLetter"))
+        .regex(new RegExp(/\d+/), t("passwordCompositionDigit")),
       passwordConfirmation: z.string(),
-      name: z.string().min(1, t('isRequired')),
-      secondName: z.string().min(1, t('isRequired')),
-      company: z.string().min(1, t('isRequired')),
-      street: z.string().min(1, t('isRequired')),
+      name: z.string().min(1, t("isRequired")),
+      secondName: z.string().min(1, t("isRequired")),
+      company: z.string().min(1, t("isRequired")),
+      street: z.string().min(1, t("isRequired")),
       number: z
         .string()
-        .min(1, t('isRequired'))
+        .min(1, t("isRequired"))
         .transform((data) => Number(data)),
       terms: z.literal(true, {
         errorMap: () => ({
-          message: t('termsRequired'),
+          message: t("termsRequired"),
         }),
       }),
     })
     .refine((data) => data.password === data.passwordConfirmation, {
-      path: ['passwordConfirmation'],
-      message: t('samePasswords'),
+      path: ["passwordConfirmation"],
+      message: t("samePasswords"),
     });
 
   const {
@@ -47,98 +49,99 @@ const Form = () => {
   return (
     <form className="flex flex-col gap-5">
       <div className="flex gap-4">
-        <InputForm
+        <Input
           id="name"
-          labelName={t('name')}
+          label={t("name")}
           placeholder="John"
           type="text"
           className="w-52"
-          {...register('name')}
-          onBlur={() => trigger('name')}
-          error={errors.name && errors.name?.message}
+          {...register("name")}
+          onBlur={() => trigger("name")}
+          errorMessage={errors.name && errors.name?.message}
         />
-        <InputForm
+        <Input
           id="secondName"
-          labelName={t('secName')}
+          label={t("secName")}
           placeholder="Doe"
           type="text"
           className="w-52"
-          {...register('secondName')}
-          onBlur={() => trigger('secondName')}
-          error={errors.secondName && errors.secondName?.message}
+          {...register("secondName")}
+          onBlur={() => trigger("secondName")}
+          errorMessage={errors.secondName && errors.secondName?.message}
         />
       </div>
-      <InputForm
+      <Input
         id="email"
-        labelName={t('email')}
+        label={t("email")}
         placeholder="name@email.com"
         type="text"
         className="w-full"
-        {...register('email')}
-        onBlur={() => trigger('email')}
-        error={errors.email && errors.email?.message}
+        {...register("email")}
+        onBlur={() => trigger("email")}
+        errorMessage={errors.email && errors.email?.message}
       />
-      <InputForm
+      <Input
         id="company"
-        labelName={t('company')}
+        label={t("company")}
         placeholder="Facebook"
         type="text"
         className="w-full"
-        {...register('company')}
-        onBlur={() => trigger('company')}
-        error={errors.company && errors.company?.message}
+        {...register("company")}
+        onBlur={() => trigger("company")}
+        errorMessage={errors.company && errors.company?.message}
       />
       <div className="flex gap-4">
-        <InputForm
+        <Input
           id="street"
-          labelName={t('street')}
+          label={t("street")}
           placeholder="Łabiszyńska"
           type="text"
-          {...register('street')}
-          onBlur={() => trigger('street')}
-          error={errors.street && errors.street?.message}
+          {...register("street")}
+          onBlur={() => trigger("street")}
+          errorMessage={errors.street && errors.street?.message}
         />
-        <InputForm
+        <Input
           id="number"
-          labelName={t('number')}
+          label={t("number")}
           placeholder="25"
           type="number"
-          {...register('number')}
-          onBlur={() => trigger('number')}
-          error={errors.number && errors.number?.message}
+          {...register("number")}
+          onBlur={() => trigger("number")}
+          errorMessage={errors.number && errors.number?.message}
         />
       </div>
-      <InputForm
+      <Input
         id="password"
-        labelName={t('yourPassword')}
+        label={t("yourPassword")}
         placeholder={String.fromCharCode(9679).repeat(10)}
         type="password"
         className="w-full"
-        {...register('password')}
-        onBlur={() => trigger('password')}
-        error={errors.password && errors.password?.message}
+        {...register("password")}
+        onBlur={() => trigger("password")}
+        errorMessage={errors.password && errors.password?.message}
       />
-      <InputForm
+      <Input
         id="passwordConfirmation"
-        labelName={t('repeatPassword')}
+        label={t("repeatPassword")}
         placeholder={String.fromCharCode(9679).repeat(10)}
         type="password"
         className="w-full"
-        error={
+        errorMessage={
           errors.passwordConfirmation && errors.passwordConfirmation?.message
         }
-        {...register('passwordConfirmation')}
-        onBlur={() => trigger('passwordConfirmation')}
+        {...register("passwordConfirmation")}
+        onBlur={() => trigger("passwordConfirmation")}
       />
       <Checkbox
-        label={t('terms')}
-        {...register('terms')}
-        onBlur={() => trigger('terms')}
-        error={errors.terms && errors.terms?.message}
+        color="primary"
+        {...register("terms")}
+        onBlur={() => trigger("terms")}
+        name={t("terms")}
+        errorMessage={errors.terms && errors.terms?.message}
       />
-      <button className="w-full h-10 border-grayishBlue rounded-2xl hover:bg-turquoise mt-4 border-2">
-        {t('signUp')}
-      </button>
+      <Button color="primary" variant="flat" type="submit">
+        {t("signUp")}
+      </Button>
     </form>
   );
 };
