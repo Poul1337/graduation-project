@@ -22,6 +22,15 @@
     "samePasswords": "Hasła nie są takie same!",
     "termsRequired": "Musisz zaakceptować warunki i zasady!",
     "passwordCompositionCapitalLetter": "Musisz użyć przynajmniej jednej dużej litery!",
-    "passwordCompositionDigit": "Musisz użyć przynajmniej jednej liczby!"
+    "passwordCompositionDigit": "Musisz użyć przynajmniej jednej liczby!",
+    "driver": "Kierowca",
+    "salesMan": "Zamawiający",
+    "selectOccupation": "Wybierz zajęcie",
+    "thanksForJoining": "Dziękujemy że {gender, select, female {dołączyłaś} male {dołączyłęś} other {dołączyłęś/dołączyłaś}} do zespółu. Powodzenia w pracy!",
+    "hello": "Dzień dobry!",
+    "wrongPassword": "Podane hasło jest błędne!",
+    "userDoesntExists": "Taki użytkownik nie istnieje!",
+    "userCreated": "Użytkownik został zarejestrowany!",
+    "existingUser": "Ten użytkownik już istnieje!"
   }
 }
