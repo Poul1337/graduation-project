@@ -1,0 +1,31 @@
+1. Podstawy funkcjonowania przedsiębiorstw zajmujących się sprzedażą artykułów biurowych
+
+1.1. Podstawowe pojęcia
+	1.1.1. bazy danych
+	1.1.2. Interfejs graficzny 
+	1.1.3. frontend
+	1.1.4. backend
+	1.1.5. biblioteki
+	1.1.6. orm
+	1.1.7. jezyk programowania
+	1.1.8. autoryzacja
+	1.1.9. diagramy
+	1.1.10. rest api 
+	
+1.2. Opis badanego obszaru
+	1.2.1. charakterystyka branży artykułów biurowych
+	1.2.2. procesy biznesowe (logistyka/dystrybucja)
+	1.2.3. stan obecny
+	1.2.4. potrzeby
+
+1.3. Interesariusze
+	1.3.1. kierowcy
+	1.3.2. zamawiajacy
+	1.3.3. kierownictwo
+	
+1.4. Opis efektów
+	1.4.1. efektywność
+	1.4.2. ekonomia pracy
+	1.4.3. obsługa klienta
+	1.4.4. minimalizacja będów
+	
