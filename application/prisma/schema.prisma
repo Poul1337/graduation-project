@@ -1,0 +1,62 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  name          String
+  secondName      String
+  email         String  @unique
+  password      String
+  occupation    String
+  terms         Boolean
+  createdAt     DateTime  @default(now())
+  licensePlate String? @default("")  @unique 
+  presences     Presence[]
+}
+
+model Task {
+  id String @id @default(auto())  @map("_id") @db.ObjectId
+  title String
+  isDone Boolean
+  active Boolean
+  createdAt DateTime @default(now())
+  taskContent String
+}
+
+model ShoppingList {
+  id       String @id @default(auto()) @map("_id") @db.ObjectId
+  name    String                                                              
+  products Product[]
+}
+
+model Product {
+  id           String @id @default(auto()) @map("_id")  @db.ObjectId
+  name         String                                  
+  quantity     Int   
+  unit         Unit                                  
+  shoppingList ShoppingList @relation(fields: [shoppingListId], references: [id])
+  shoppingListId String @db.ObjectId
+}
+
+model Presence {
+  id            String    @id @default(auto()) @map("_id") @db.ObjectId
+  hours         Int
+  date          DateTime @default(now()) 
+  user          User      @relation(fields: [licensePlate], references: [licensePlate])
+  licensePlate  String 
+}
+
+enum Unit {
+  SZTUKI
+  KARTONY
+  BINDY
+  BUTELKI
+  OPACKOWANIA
+  RYZY
+}
