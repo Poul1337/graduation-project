@@ -10,34 +10,11 @@ export const authOptions: NextAuthOptions = {
   },
   secret: process.env.NEXTAUTH_SECRET,
   pages: {
-    signIn: '/login',
-  },
-  callbacks: {
-    async session({ session, token }) {
-      return {
-        ...session,
-        user: {
-          ...session.user,
-          id: token.id,
-          email: token.email,
-        },
-      };
-    },
-
-    async jwt({ token, user }) {
-      if (user) {
-        return {
-          ...token,
-          id: user.id,
-          email: user.email,
-          name: user.name,
-        };
-      }
-      return token;
-    },
+    signIn: '/login' || '/',
   },
   providers: [
     CredentialsProvider({
+      id: 'credentials',
       name: 'credentials',
       type: 'credentials',
       credentials: {
@@ -70,11 +47,37 @@ export const authOptions: NextAuthOptions = {
         }
 
         return {
-          id: `${existingUser.id}`,
+          id: existingUser.id,
           name: existingUser.name,
           email: existingUser.email,
+          occupation: existingUser.occupation,
         };
       },
     }),
   ],
+  callbacks: {
+    async session({ session, token }) {
+      return {
+        ...session,
+        user: {
+          ...session.user,
+          id: token.id,
+          email: token.email,
+          occupation: token.occupation,
+        },
+      };
+    },
+
+    async jwt({ token, user }) {
+      if (user) {
+        return {
+          ...token,
+          id: user.id,
+          occupation: user.occupation,
+          email: user.email,
+        };
+      }
+      return token;
+    },
+  },
 };

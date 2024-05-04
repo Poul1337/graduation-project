@@ -8,6 +8,7 @@ import { AppContext } from '@/Context';
 import './globals.css';
 import clsx from 'clsx';
 import { Toaster } from 'sonner';
+import { getNextAuthSession } from '@/lib/getNextAuthSession';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -32,12 +33,14 @@ const RootLayout = async ({
     notFound();
   }
 
+  const session = await getNextAuthSession();
+
   return (
     <html lang={locale}>
       <body className={clsx(inter.className, 'dark')}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <Toaster richColors={true} position="bottom-right" />
-          <AppContext>{children}</AppContext>
+          <AppContext session={session}>{children}</AppContext>
         </NextIntlClientProvider>
       </body>
     </html>

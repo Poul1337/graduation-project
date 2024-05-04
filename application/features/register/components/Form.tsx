@@ -1,3 +1,4 @@
+/* eslint-disable react/no-children-prop */
 'use client';
 
 import { useTranslations } from 'next-intl';
@@ -6,14 +7,14 @@ import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { Button, SelectItem, useDisclosure } from '@nextui-org/react';
 
-import { Checkbox, Modal, Select } from '@/Components';
-import { Input } from '@/Components';
+import { Checkbox, Input, LoadingPage, Modal, Select } from '@/Components';
 import { usePostUser } from '@/hooks/usePostUser';
+import { Occupation } from '@prisma/client';
 
 const Form = () => {
   const t = useTranslations('LoginPage');
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
-  const { mutate } = usePostUser(onOpen);
+  const { mutate, status } = usePostUser(onOpen);
 
   const schema = z
     .object({
@@ -22,7 +23,7 @@ const Form = () => {
           message: t('termsRequired'),
         }),
       }),
-      occupation: z.enum([t('driver'), t('salesMan')], {
+      occupation: z.enum([Occupation.DRIVER, Occupation.SALESMAN], {
         errorMap: () => ({ message: t('isRequired') }),
       }),
       email: z.string().email(t('wrongEmail')),
@@ -43,19 +44,25 @@ const Form = () => {
   const {
     trigger,
     register,
-    formState: { errors },
+    formState: { errors, isSubmitting },
     handleSubmit,
     watch,
+    reset,
   } = useForm<z.infer<typeof schema>>({ resolver: zodResolver(schema) });
 
   const submit = async (values: z.infer<typeof schema>) => {
     mutate(values);
+    if (status !== 'error') {
+      reset();
+    }
   };
 
   const userName = watch('name');
 
   return (
     <>
+      {isSubmitting && <LoadingPage />}
+
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(submit)}>
         <div className="flex gap-4">
           <Input
@@ -87,10 +94,9 @@ const Form = () => {
           errorMessage={errors.email && errors.email?.message}
         />
         <Select
-          // eslint-disable-next-line react/no-children-prop
           children={[
-            <SelectItem key={t('driver')}>{t('driver')}</SelectItem>,
-            <SelectItem key={t('salesMan')}>{t('salesMan')}</SelectItem>,
+            <SelectItem key={Occupation.DRIVER}>{t('driver')}</SelectItem>,
+            <SelectItem key={Occupation.SALESMAN}>{t('salesMan')}</SelectItem>,
           ]}
           variant="underlined"
           errorMessage={errors.occupation && errors.occupation?.message}
@@ -129,7 +135,6 @@ const Form = () => {
       <Modal
         isOpen={isOpen}
         onOpenChange={onOpenChange}
-        // eslint-disable-next-line react/no-children-prop
         children={undefined}
         userName={userName}
         href="/login"

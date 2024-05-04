@@ -48,7 +48,11 @@ const Input: ForwardRefRenderFunction<HTMLInputElement, InputProps> = (
                 toggleVisibility();
               }}
             >
-              {!isVisible ? <IoEye /> : <IoEyeOff />}
+              {!isVisible ? (
+                <IoEye color="white" />
+              ) : (
+                <IoEyeOff color="white" />
+              )}
             </button>
           ) : null
         }

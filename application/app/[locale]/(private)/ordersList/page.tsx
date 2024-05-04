@@ -1,5 +1,5 @@
 const ordersList = () => {
-  return <h1>Orders list</h1>;
+  return null;
 };
 
 export default ordersList;

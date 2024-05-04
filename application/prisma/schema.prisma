@@ -13,11 +13,13 @@ model User {
   secondName      String
   email         String  @unique
   password      String
-  occupation    String
+  occupation    Occupation
   terms         Boolean
-  createdAt     DateTime  @default(now())
-  licensePlate String? @default("")  @unique 
+  createdAt     DateTime  @default(now())  @map("created_at")
+  updatedAt     DateTime  @updatedAt @map("updated_at")
+  licensePlate LicensePlate? @unique 
   presences     Presence[]
+  drivingArea   DriversAreas?
 }
 
 model Task {
@@ -49,7 +51,29 @@ model Presence {
   hours         Int
   date          DateTime @default(now()) 
   user          User      @relation(fields: [licensePlate], references: [licensePlate])
-  licensePlate  String 
+  licensePlate  LicensePlate 
+}
+
+model sellOrders {
+  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  buyerCity     String
+  buyerPhone    Int
+  buyerName     String
+  buyerStreet   String
+  buyerZipCode  String
+  sellerName    String
+  sellerCity    String
+  sellerStreet  String
+  sellerZipCode String
+  sellerPhone   Int
+  productName   String
+  quantity      Int
+  unit          Unit
+  priceNetto    Int
+  priceBrutto   Int
+  clientNip     Int
+  sellerNip     Int
+  area          DriversAreas
 }
 
 enum Unit {
@@ -59,4 +83,29 @@ enum Unit {
   BUTELKI
   OPACKOWANIA
   RYZY
+}
+
+enum DriversAreas {
+  N
+  S
+  W
+  E
+  NE
+  NW
+  SW
+  SE
+}
+
+enum Occupation {
+  DRIVER
+  SALESMAN
+}
+
+enum LicensePlate {
+  WPRAB123
+  WPRCD456
+  WPREF789
+  WPRGH012
+  WPRIJ345
+  WPRKL678
 }
