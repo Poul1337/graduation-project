@@ -40,7 +40,7 @@ const TopIconsArr = [
 const SideBar = () => {
   const t = useTranslations('sideBar');
   return (
-    <main className="flex flex-col w-20 bg-bluishGray h-screen border-r-2 border-r-black items-center justify-between absolute">
+    <main className="flex flex-col w-20 bg-bluishGray h-screen border-r-2 border-r-black items-center justify-between">
       <div className="flex flex-col mt-20 gap-7">
         {TopIconsArr.map(({ children, href, toolTipContent }, index) => (
           <span key={index} className="hover:scale-150 duration-200">

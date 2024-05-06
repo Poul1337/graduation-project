@@ -8,16 +8,16 @@ datasource db {
 }
 
 model User {
-  id String @id @default(auto())  @map("_id") @db.ObjectId
+  id            String       @id @default(auto()) @map("_id") @db.ObjectId
   name          String
-  secondName      String
-  email         String  @unique
+  secondName    String
+  email         String       @unique
   password      String
   occupation    Occupation
   terms         Boolean
-  createdAt     DateTime  @default(now())  @map("created_at")
-  updatedAt     DateTime  @updatedAt @map("updated_at")
-  licensePlate LicensePlate? @unique 
+  createdAt     DateTime     @default(now()) @map("created_at")
+  updatedAt     DateTime     @updatedAt @map("updated_at")
+  licensePlate  LicensePlate? @unique
   presences     Presence[]
   drivingArea   DriversAreas?
 }
@@ -55,9 +55,9 @@ model Presence {
 }
 
 model sellOrders {
-  id            String @id @default(auto()) @map("_id") @db.ObjectId
+  id            String        @id @default(auto()) @map("_id") @db.ObjectId
   buyerCity     String
-  buyerPhone    Int
+  buyerPhone    String
   buyerName     String
   buyerStreet   String
   buyerZipCode  String
@@ -65,15 +65,22 @@ model sellOrders {
   sellerCity    String
   sellerStreet  String
   sellerZipCode String
-  sellerPhone   Int
+  sellerPhone   String
+  clientNip     Int
+  sellerNip     Int
+  area          DriversAreas
+  products      sellProduct[]
+}
+
+model sellProduct {
+  id            String     @id @default(auto()) @map("_id") @db.ObjectId
+  order         sellOrders @relation(fields: [orderId], references: [id])
+  orderId       String     @map("_orderId") @db.ObjectId
   productName   String
   quantity      Int
   unit          Unit
   priceNetto    Int
   priceBrutto   Int
-  clientNip     Int
-  sellerNip     Int
-  area          DriversAreas
 }
 
 enum Unit {

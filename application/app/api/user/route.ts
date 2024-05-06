@@ -1,6 +1,20 @@
 import { prisma } from '@/lib/prismaClient';
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { compare, hash } from 'bcrypt';
+
+export const GET = async (req: NextRequest) => {
+  try {
+    const searchParam = req.nextUrl.searchParams.get('id');
+
+    const user = await prisma.user.findUnique({
+      where: { id: searchParam as string },
+    });
+
+    return NextResponse.json(user, { status: 200 });
+  } catch (error: any) {
+    return NextResponse.json(error, { status: 500 });
+  }
+};
 
 export const POST = async (req: Request) => {
   try {
@@ -43,9 +57,16 @@ export const PUT = async (req: Request) => {
     const { id, email, licensePlate, driverArea, newPassword, currentEmail } =
       body;
 
-    const getExisingUser = await prisma.user.findUnique({
+    const getExistingUser = await prisma.user.findUnique({
       where: { id: id },
     });
+
+    if (!getExistingUser) {
+      return NextResponse.json(
+        { user: null, message: 'User not found' },
+        { status: 404 }
+      );
+    }
 
     if (licensePlate) {
       const checkLicensePlate = await prisma.user.findUnique({
@@ -53,7 +74,7 @@ export const PUT = async (req: Request) => {
           licensePlate,
         },
       });
-      if (checkLicensePlate) {
+      if (checkLicensePlate && checkLicensePlate.id !== id) {
         return NextResponse.json(
           { user: null, message: 'existingLicensePlate' },
           { status: 409 }
@@ -61,28 +82,25 @@ export const PUT = async (req: Request) => {
       }
     }
 
-    const passwordMatch = await compare(
-      newPassword,
-      getExisingUser?.password as string
-    );
+    const passwordMatch = await compare(newPassword, getExistingUser.password);
 
     if (passwordMatch) {
       return NextResponse.json(
-        { user: null, message: 'allreadyUsingThisPassword' },
+        { user: null, message: 'alreadyUsingThisPassword' },
         { status: 409 }
       );
     }
 
-    if (getExisingUser?.drivingArea === driverArea) {
+    if (getExistingUser.drivingArea === driverArea) {
       return NextResponse.json(
-        { user: null, message: 'allreadyOnThisArea' },
+        { user: null, message: 'alreadyOnThisArea' },
         { status: 409 }
       );
     }
 
-    if (getExisingUser?.email === email) {
+    if (getExistingUser.email === email && email !== currentEmail) {
       return NextResponse.json(
-        { user: null, message: 'allreadyUseThisEmail' },
+        { user: null, message: 'alreadyUseThisEmail' },
         { status: 409 }
       );
     }
@@ -96,7 +114,7 @@ export const PUT = async (req: Request) => {
     if (newPassword) updatedData.password = bcrypt;
 
     if (Object.keys(updatedData).length === 0) {
-      throw new Error('nonData');
+      throw new Error('noDataToUpdate');
     }
 
     const updatedUser = await prisma.user.update({
@@ -104,7 +122,7 @@ export const PUT = async (req: Request) => {
       data: { ...updatedData },
     });
 
-    return NextResponse.json(updatedUser, { status: 201 });
+    return NextResponse.json(updatedUser, { status: 200 });
   } catch (error: any) {
     return NextResponse.json(error.message, { status: 500 });
   }

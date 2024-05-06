@@ -1,5 +1,7 @@
-const ordersList = () => {
-  return null;
+import { OrdersListPage } from '@/features/ordersList';
+
+const OrdersList = () => {
+  return <OrdersListPage />;
 };
 
-export default ordersList;
+export default OrdersList;
