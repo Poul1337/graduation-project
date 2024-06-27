@@ -83,12 +83,27 @@ model sellProduct {
   priceBrutto   Int
 }
 
+model shoppingList {
+  id        String @id @default(auto()) @map("_id") @db.ObjectId
+  name      String
+  products  shoppingListProduct[] @relation("ShoppingListProducts")
+}
+
+model shoppingListProduct {
+  id            String         @id @default(auto()) @map("_id") @db.ObjectId
+  orderId       String         @map("_orderId") @db.ObjectId
+  list          shoppingList   @relation(fields: [orderId], references: [id], name: "ShoppingListProducts")
+  productName   String
+  quantity      Int
+  unit          Unit
+}
+
 enum Unit {
   SZTUKI
   KARTONY
   BINDY
   BUTELKI
-  OPACKOWANIA
+  OPAKOWANIA
   RYZY
 }
 

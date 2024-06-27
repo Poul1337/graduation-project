@@ -72,5 +72,30 @@
     "allreadyUseThisEmail": "Aktualnie używasz tego emaila",
     "userEdited": "Pomyślnie zaktualizowany profil",
     "nonData": "Nic nie zostało zmienione"
+  },
+  "currentOrder": {
+    "priceBrutto": "Cena brutto",
+    "priceNetto": "Cena netto",
+    "productName": "Nazwa produktu",
+    "quantity": "Ilość",
+    "unit": "Jednostka",
+    "vat": "Podatek vat",
+    "sztuki": "sztuki",
+    "kartony": "kartony",
+    "bindy": "bindy",
+    "butelki": "butelki",
+    "opakowania": "opakowania",
+    "ryzy": "ryzy"
+  },
+  "addListModal": {
+    "addList": "Dodaj liste",
+    "listName": "Nazwa listy",
+    "isRequired": "Pole obowiązkowe!",
+    "listExists": "Lista już istnieje!",
+    "positiveRule": "Liczba musi być większa od zera!",
+    "productName": "Nazwa produktu",
+    "unit": "Jednostka",
+    "quantity": "Ilość",
+    "addProduct": "Dodaj produkt"
   }
 }

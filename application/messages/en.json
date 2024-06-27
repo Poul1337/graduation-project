@@ -72,5 +72,25 @@
     "allreadyUseThisEmail": "You are already using this email",
     "userEdited": "Profile successfully updated",
     "nonData": "No data was provided"
+  },
+  "currentOrder": {
+    "priceBrutto": "Gross price",
+    "priceNetto": "Net price",
+    "productName": "Product name",
+    "quantity": "Quantity",
+    "unit": "Unit",
+    "vat": "Vat",
+    "sztuki": "pieces",
+    "kartony": "boxes",
+    "bindy": "binds",
+    "butelki": "bottles",
+    "opakowania": "packaging",
+    "ryzy": "rufous"
+  },
+  "addListModal": {
+    "addList": "Add list",
+    "listName": "List name",
+    "isRequired": "Field required!",
+    "listExists": "This list exists"
   }
 }

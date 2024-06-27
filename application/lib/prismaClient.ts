@@ -1,5 +1,5 @@
 import { faker } from '@faker-js/faker';
-import { DriversAreas, Occupation, PrismaClient, Unit } from '@prisma/client';
+import { DriversAreas, PrismaClient, Unit } from '@prisma/client';
 
 export const prisma = new PrismaClient();
 
@@ -36,13 +36,16 @@ const main = async () => {
       for (const order of allOrders) {
         const products = [];
         for (let i = 0; i < Math.floor(Math.random() * (21 - 5)) + 5; i++) {
+          const priceNetto = faker.number.int({ min: 10, max: 100 });
+          const priceBrutto = Math.round(priceNetto * 1.23);
+
           const product = {
             orderId: order.id,
             productName: faker.commerce.productName(),
             quantity: faker.number.int({ min: 1, max: 10 }),
             unit: faker.helpers.enumValue(Unit),
-            priceNetto: faker.number.int({ min: 10, max: 100 }),
-            priceBrutto: faker.number.int({ min: 10, max: 100 }),
+            priceNetto: priceNetto,
+            priceBrutto: priceBrutto,
           };
           products.push(product);
         }

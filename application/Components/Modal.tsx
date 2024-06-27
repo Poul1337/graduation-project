@@ -5,14 +5,12 @@ import {
   ModalProps as ModalPropsNextUi,
   Modal as ModalNextUi,
   ModalContent,
-  ModalHeader,
   ModalBody,
   ModalFooter,
 } from '@nextui-org/react';
 import { useTranslations } from 'next-intl';
 import { checkGender } from '@/utils/checkGender';
 import { Button } from '.';
-import { redirect } from 'next/dist/server/api-utils';
 import Link from 'next/link';
 
 type ModalProps = ModalPropsNextUi & {

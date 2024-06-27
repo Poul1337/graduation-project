@@ -1,9 +1,4 @@
-import {
-  ForwardRefRenderFunction,
-  HTMLAttributes,
-  forwardRef,
-  useEffect,
-} from 'react';
+import { ForwardRefRenderFunction, HTMLAttributes, forwardRef } from 'react';
 import {
   Checkbox as CheckboxNextUi,
   CheckboxProps as CheckboxPropsNextUi,
@@ -12,7 +7,7 @@ import {
 
 type CheckboxProps = HTMLAttributes<HTMLInputElement> & {
   errorMessage?: string | undefined;
-  label: string;
+  label?: string;
 };
 
 const Checkbox: ForwardRefRenderFunction<HTMLInputElement, CheckboxProps> = (
